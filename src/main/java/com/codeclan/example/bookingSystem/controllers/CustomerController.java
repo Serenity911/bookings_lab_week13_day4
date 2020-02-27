@@ -20,4 +20,9 @@ public class CustomerController {
     public List<Customer> findAllCustomerByCourseId(@RequestParam Long id) {
         return customerRepository.findAllCustomerByCourseId(id);
     }
+
+    @GetMapping(value = "/search/findAllCustomersByTownByCourseId")
+    public List<Customer> findAllCustomersByTownByCourseId(@RequestParam String town, @RequestParam Long id) {
+        return customerRepository.findAllCustomersByTownByCourseId(town, id);
+    }
 }

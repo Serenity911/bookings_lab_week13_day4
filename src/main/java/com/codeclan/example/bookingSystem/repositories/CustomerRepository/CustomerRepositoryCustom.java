@@ -5,5 +5,6 @@ import com.codeclan.example.bookingSystem.models.Customer;
 import java.util.List;
 
 public interface CustomerRepositoryCustom {
-    public List<Customer> findAllCustomerByCourseId(Long id);
+    List<Customer> findAllCustomerByCourseId(Long id);
+    List<Customer> findAllCustomersByTownByCourseId(String town, Long id);
 }

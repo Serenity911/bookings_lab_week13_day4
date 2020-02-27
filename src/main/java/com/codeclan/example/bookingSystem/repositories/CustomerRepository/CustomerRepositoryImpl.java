@@ -27,14 +27,35 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
             cr.add(Restrictions.eq("bookingsAlias.course.id", id));
 
             result = cr.list();
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             session.close();
             return result;
         }
+    }
+
+    @Transactional
+    public List<Customer> findAllCustomersByTownByCourseId(String town, Long id) {
+        List<Customer> result = null;
+        Session session = entityManager.unwrap(Session.class);
+        try {
+            Criteria cr = session.createCriteria(Customer.class);
+
+            cr.add(Restrictions.eq("customerTown", town));
+            cr.createAlias("bookings", "bookingsAlias");
+            cr.add(Restrictions.eq("bookingsAlias.course.id", id));
+
+            result = cr.list();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } finally {
+            session.close();
+
+            return result;
+        }
+
+
     }
 
 }
