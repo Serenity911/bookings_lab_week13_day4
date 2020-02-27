@@ -1,6 +1,10 @@
 package com.codeclan.example.bookingSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -19,10 +23,15 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnoreProperties("customer")
+    @OneToMany(mappedBy = "customer")
+    private List<Booking> bookings;
+
     public Customer(String fullName, String customerTown, int age) {
         this.fullName = fullName;
         this.customerTown = customerTown;
         this.age = age;
+        this.bookings = new ArrayList<>();
     }
 
     public Customer() {
@@ -34,14 +43,6 @@ public class Customer {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getTown() {
-        return customerTown;
-    }
-
-    public void setTown(String town) {
-        this.customerTown = town;
     }
 
     public int getAge() {
@@ -58,5 +59,21 @@ public class Customer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCustomerTown() {
+        return customerTown;
+    }
+
+    public void setCustomerTown(String customerTown) {
+        this.customerTown = customerTown;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
