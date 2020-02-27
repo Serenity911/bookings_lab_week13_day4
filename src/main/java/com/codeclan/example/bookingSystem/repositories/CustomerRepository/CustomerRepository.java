@@ -9,4 +9,6 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface CustomerRepository extends JpaRepository<Customer, Long>, CustomerRepositoryCustom {
+    public List<Customer> findAllCustomerByCourseId(Long id);
+
 }
