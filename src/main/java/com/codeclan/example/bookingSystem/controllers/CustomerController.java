@@ -25,4 +25,9 @@ public class CustomerController {
     public List<Customer> findAllCustomersByTownByCourseId(@RequestParam String town, @RequestParam Long id) {
         return customerRepository.findAllCustomersByTownByCourseId(town, id);
     }
+
+    @GetMapping(value = "search/findAllCustomersOlderThanByTownByCourseId")
+    public List<Customer> findAllCustomersOlderThanByTownByCourseId(@RequestParam int age, @RequestParam String town, @RequestParam Long id){
+        return customerRepository.findAllCustomersOlderThanByTownByCourseId(age, town, id);
+    }
 }
